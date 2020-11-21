@@ -17,28 +17,28 @@ Note: If the month or day is a single digit number, then it shall be preceeded b
 */
 
 const lifePathNumber = (dateOfBirth) => {
-  let lifenum = '';
-  let array;
-  let lifestring = '';
-
+  let lifeNum = '';
   for(let i = 0; i < dateOfBirth.length; i++) {
-    if(dateOfBirth[i] !== '-') {
-      lifenum += dateOfBirth[i];
+    if((dateOfBirth[i]).toString() !== '-') {
+      lifeNum += dateOfBirth[i];
     }
   }
-  array = lifenum.split('');
-  lifenum = 0;
-
-  for(let i = 0; i < array.length; i++) {
-    lifenum += Number(array[i]);
+  console.log('here is lifeNum after the first loop: ' + lifeNum);
+  const condenser = (number) => {
+    let numStr = number.toString();
+    let condensed = 0;
+    for(let i = 0; i < numStr.length; i++) {
+      condensed += Number(numStr[i]);
+    }
+    if(condensed.toString().length >= 2) {
+      return condenser(condensed);
+    } else {
+      return condensed
+    }
   }
-  lifestring = lifenum.toString();
-  
-  if(lifestring.length === 2) {
-    return Number(lifestring[0]) + Number(lifestring[1]);
-  } else if (lifenum.toString().length > 2){
-    return lifePathNumber(lifenum);
+  if(lifeNum.toString().length >= 2) {
+    return condenser(lifeNum);
   } else {
-    return lifenum;
+    return lifeNum;
   }
 }
