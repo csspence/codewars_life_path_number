@@ -16,8 +16,29 @@ You do not need to check that the input to the lifePathNumber()-function is corr
 Note: If the month or day is a single digit number, then it shall be preceeded by a 0 (zero). For example, in Einstein's case the month of March is 3; which is a single digit number. The function shall in this case be called with the following parameter: lifePathNumber("1879-03-14").
 */
 
-function lifePathNumber(dateOfBirth) {
-  // Your solution...
+const lifePathNumber = (dateOfBirth) => {
+  let lifenum = '';
+  let array;
+  let lifestring = '';
+
+  for(let i = 0; i < dateOfBirth.length; i++) {
+    if(dateOfBirth[i] !== '-') {
+      lifenum += dateOfBirth[i];
+    }
+  }
+  array = lifenum.split('');
+  lifenum = 0;
+
+  for(let i = 0; i < array.length; i++) {
+    lifenum += Number(array[i]);
+  }
+  lifestring = lifenum.toString();
   
-  return lifenum;
+  if(lifestring.length === 2) {
+    return Number(lifestring[0]) + Number(lifestring[1]);
+  } else if (lifenum.toString().length > 2){
+    return lifePathNumber(lifenum);
+  } else {
+    return lifenum;
+  }
 }
